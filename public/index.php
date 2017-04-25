@@ -46,44 +46,31 @@ function render($fileName, $params = [])
 use Phroute\Phroute\RouteCollector;
 
 $router = new RouteCollector();
-$router->get('/', function () use ($pdo) {
-    $query = $pdo->prepare('SELECT * FROM blog_posts ORDER BY  id DESC ');
-    $query->execute();
-    $blogs = $query->fetchAll(PDO::FETCH_ASSOC);
-    //include '../views/index.php';
-    return render('../views/index.php', ['blogs' => $blogs]);
-});
 
-$router->get('/admin', function () use ($pdo) {
-    return render('../views/admin/index.php');
-});
+$router->controller(
+    '/',
+    App\Controllers\IndexController::class
+);
 
-$router->get('/admin/posts', function () use ($pdo) {
+$router->controller(
+    '/admin',
+    App\Controllers\Admin\IndexController::class
+);
 
-    $query = $pdo->prepare('SELECT * FROM blog_posts ORDER BY  id DESC ');
-    $query->execute();
-    $blogs = $query->fetchAll(PDO::FETCH_ASSOC);
-    return render('../views/admin/posts.php', ['blogs' => $blogs]);
+$router->controller(
+    '/admin/posts',
+    App\Controllers\Admin\PostController::class
+);
 
-});
+$router->controller(
+    '/admin/posts/create',
+    App\Controllers\Admin\PostController::class
+);
 
-
-$router->get('/admin/posts/create', function () use ($pdo) {
-    return render('../views/admin/insert-post.php');
-});
-
-$router->post('/admin/posts/create', function () use ($pdo) {
-    $sql = 'INSERT INTO blog_posts(title, content) VALUES(:title, :content)';
-    $query = $pdo->prepare($sql);
-
-    $result = $query->execute([
-        'title' => $_POST['title'],
-        'content' => $_POST['content']
-    ]);
-
-    return render('../views/admin/insert-post.php', ['result' => $result]);
-});
-
+//$router->controller(
+//    '/admin/posts/create',
+//    App\Controllers\Admin\PostController::class
+//);
 
 //dispacher
 
