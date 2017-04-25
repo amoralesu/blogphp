@@ -23,7 +23,7 @@
             <h2>Admin Panel</h2>
             <ul>
                 <li>
-                    <a href="posts.php">Manager</a>
+                    <a href="<?php echo BASE_URL; ?>admin/posts">Manager</a>
                 </li>
             </ul>
         </div>
@@ -40,7 +40,7 @@
             <footer>
                 This is a footer
                 <br>
-                <a href="admin/index.php">Admin</a>
+                <a href="<?php echo BASE_URL; ?>admin">Admin</a>
             </footer>
         </div>
     </div>

@@ -1,18 +1,3 @@
-<?php
-
-$result = false;
-
-if (!empty($_POST)) {
-    $sql = 'INSERT INTO blog_posts(title, content) VALUES(:title, :content)';
-    $query = $pdo->prepare($sql);
-    $result = $query->execute([
-        'title' => $_POST['title'],
-        'content' => $_POST['content']
-    ]);
-}
-
-
-?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -36,14 +21,15 @@ if (!empty($_POST)) {
     <div class="row">
         <div class="col-md-8">
             <h2>New Post</h2>
-            <a class="btn btn-default" href="posts.php">Back</a>
+            <!--            <a class="btn btn-default" href="posts.php">Back</a>-->
+            <a class="btn btn-default" href="<?php echo BASE_URL; ?>admin/posts">Back</a>
 
             <?php
-            if ($result) {
+            if (isset($result) && $result) {
                 echo '<div class="alert alert-success">Datos Guardados con exito</div>';
             }
             ?>
-            <form action="insert-post.php" method="post">
+            <form method="post">
                 <div class="form-group">
                     <label for="">Title:</label>
                     <input class="form-control" type="text" name="title"/>
@@ -51,7 +37,6 @@ if (!empty($_POST)) {
                 <textarea class="form-control" type="text" name="content" rows="5"></textarea>
 
                 <input class="btn btn-primary" type="submit" value="Save">
-
             </form>
 
         </div>
@@ -68,7 +53,7 @@ if (!empty($_POST)) {
             <footer>
                 This is a footer
                 <br>
-                <a href="admin/index.php">Admin</a>
+                <a href="<?php echo BASE_URL; ?>admin">Admin</a>
             </footer>
         </div>
     </div>

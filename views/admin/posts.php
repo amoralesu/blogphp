@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -22,7 +21,7 @@
     <div class="row">
         <div class="col-md-8">
             <h2>Posts</h2>
-            <a class="btn btn-primary" href="insert-post.php">New Post</a>
+            <a class="btn btn-primary" href="<?php echo BASE_URL; ?>admin/posts/create">New Post</a>
             <table class="table">
                 <tr>
                     <th>Title</th>
@@ -53,7 +52,8 @@
             <footer>
                 This is a footer
                 <br>
-                <a href="admin/index.php">Admin</a>
+                <!--                <a href="admin/index.php">Admin</a>-->
+                <a href="<?php echo BASE_URL; ?>admin">Admin</a>
             </footer>
         </div>
     </div>
